@@ -10,27 +10,24 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>config-service</artifactId>
-    <name>config-service</name>
-    <description>config-service</description>
+    <artifactId>discovery-service</artifactId>
+    <name>discovery-service</name>
+    <description>discovery-service</description>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            <artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-    <!-- ============================================= -->
-    <!-- * Test dependencies       -->
-    <!-- ============================================= -->
+        <!-- ============================================= -->
+        <!-- * Test dependencies       -->
+        <!-- ============================================= -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
