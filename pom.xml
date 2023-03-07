@@ -14,11 +14,14 @@
   <inceptionYear>2023</inceptionYear>
   <modules>
     <module>config-service</module>
+    <module>admin-service</module>
+    <module>discovery-service</module>
   </modules>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>17</java.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
     <!-- Dependency versions -->
     <version.spring.boot>3.0.4</version.spring.boot>
     <spring-cloud.version>2022.0.1</spring-cloud.version>
@@ -48,6 +51,21 @@
   <build>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${version.spring.boot}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <mainClass>${start-class}</mainClass>
+          </configuration>
+        </plugin>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
