@@ -1,0 +1,11 @@
+server:
+  port: 8888
+spring:
+  profiles:
+    active: "management,security"
+  application:
+    name: config-service
+  endpoints:
+    web:
+      exposure:
+        include: '*'
