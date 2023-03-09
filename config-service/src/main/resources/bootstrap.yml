@@ -1,0 +1,13 @@
+# Bootstrap.yml is loaded before application.yml. So any info that is needed for any application*.yml,
+# needs to be put here
+spring:
+  application:
+    name: "config-service"
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///D:/Dev/Personal/service-universe-config,file:///D:/Dev/Personal/service-universe-config/{application}
+#        git:
+#          uri: file:///D:/Dev/Personal/service-universe-config
+#          search-paths: {application}

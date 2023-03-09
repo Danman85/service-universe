@@ -25,6 +25,7 @@
     <!-- Dependency versions -->
     <version.spring.boot>3.0.4</version.spring.boot>
     <spring-cloud.version>2022.0.1</spring-cloud.version>
+    <eureka.client.version>4.0.0</eureka.client.version>
   </properties>
 
   <dependencyManagement>
@@ -41,6 +42,13 @@
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
         <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        <version>${eureka.client.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -93,10 +101,6 @@
         <plugin>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
         </plugin>
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
