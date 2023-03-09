@@ -1,11 +1,5 @@
 server:
-  port: 8888
+  port: 8900
 spring:
   profiles:
-    active: "management,security"
-  application:
-    name: config-service
-  endpoints:
-    web:
-      exposure:
-        include: '*'
+    active: "native,management,logging"

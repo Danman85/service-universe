@@ -1,0 +1,9 @@
+# Bootstrap.yml is loaded before application.yml. So any info that is needed for any application*.yml,
+# needs to be put here
+spring:
+  application:
+    name: "discovery-service"
+  profiles:
+    active: management
+  config:
+    import: optional:configserver:http://localhost:8900

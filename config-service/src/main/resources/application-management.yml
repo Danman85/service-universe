@@ -1,4 +1,8 @@
 management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
   endpoint:
     health:
       group:
@@ -6,5 +10,8 @@ management:
           include:
             - diskSpace
             - ping
-          show-components: when_authorized
-          show-details: when_authorized
+          show-components: always
+          show-details: always
+    env:
+      enabled: true
+      show-values: always
