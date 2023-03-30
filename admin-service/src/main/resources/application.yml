@@ -5,3 +5,14 @@ spring:
     active: management
   config:
     import: optional:configserver:http://localhost:8900
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      startup: ${random.int}
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    registry-fetch-interval-seconds: 5
