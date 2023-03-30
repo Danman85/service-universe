@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: demo-service
+  profiles:
+    active: management
+  config:
+    import: optional:configserver:http://localhost:8900
+server:
+  port: 8082

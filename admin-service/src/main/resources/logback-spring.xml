@@ -11,7 +11,7 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>./logs/config-service.log</file>
+        <file>./logs/admin-service.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <fileNamePattern>admin-service.%i.log</fileNamePattern>
             <minIndex>1</minIndex>

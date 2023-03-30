@@ -17,7 +17,7 @@ IF EXIST %PROP_FILE% (
 ECHO "Properties =========================================="
 ECHO "- Jdk: %JDK%"
 
-SET SERVICE_NAME=admin-service
+SET SERVICE_NAME=demo-service
 SET BUILD_DIR=%PROJECT_DIR%\%SERVICE_NAME%\target
 
 FOR %%F in (%BUILD_DIR%\*.jar) DO (

@@ -18,7 +18,7 @@ ECHO "Properties =========================================="
 ECHO "- Jdk: %JDK%"
 
 SET SERVICE_NAME=discovery-service
-SET BUILD_DIR=%project_dir%\%service_name%\target
+SET BUILD_DIR=%PROJECT_DIR%\%SERVICE_NAME%\target
 
 FOR %%F in (%BUILD_DIR%\*.jar) DO (
     SET JAR_FILE=%%F
