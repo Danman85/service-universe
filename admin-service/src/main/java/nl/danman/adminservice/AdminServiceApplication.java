@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 
-//@EnableDiscoveryClient
 @EnableAdminServer
 @SpringBootApplication
 public class AdminServiceApplication {
