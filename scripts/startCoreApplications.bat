@@ -12,7 +12,7 @@ start ..\discovery-service\scripts\startDiscoveryService.bat
 ECHO "Starting admin-service"
 start ..\admin-service\scripts\startAdminService.bat
 
-ECHO "Starting demo-service"
-start ..\demo-service\scripts\startDemoService.bat
+REM ECHO "Starting demo-service"
+REM start ..\demo-service\scripts\startDemoService.bat
 
 @ECHO ON

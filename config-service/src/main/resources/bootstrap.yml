@@ -1,8 +1,6 @@
 # Bootstrap.yml is loaded before application.yml. So any info that is needed for any application*.yml,
 # needs to be put here
 spring:
-  application:
-    name: "config-service"
   cloud:
     config:
       server:

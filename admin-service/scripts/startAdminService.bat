@@ -3,7 +3,7 @@
 @REM populate environment variables with default values
 SET JDK=%JAVA_HOME%
 FOR %%a in ("%~dp0\..\..") do SET PROJECT_DIR=%%~fa
-SET PROP_FILE=%PROJECT_DIR%/scripts/project.properties
+SET PROP_FILE=%PROJECT_DIR%/project.properties
 
 IF EXIST %PROP_FILE% (
     ECHO "Property file found, using custom properties"
