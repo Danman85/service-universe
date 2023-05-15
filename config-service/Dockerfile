@@ -2,10 +2,22 @@ FROM openjdk:17-jdk-slim
 
 MAINTAINER Danman85
 
-ARG JAR_FILE=target/config-service-0.0.1-SNAPSHOT.jar
+ENV APP_HOME="/opt/app"
+ENV ARTIFACT_NAME="config-service-0.0.1-SNAPSHOT.jar"
+# HTTP server port
+ENV SERVER_PORT=8900
+# Java debug port
+ENV DEBUG_PORT=8901
 
-WORKDIR /usr/src
+# Expose default servlet container port
+EXPOSE ${SERVER_PORT}
 
-COPY ${JAR_FILE} app.jar
+RUN mkdir $APP_HOME
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY /image-entrypoint.sh /
+COPY /target/*.jar $APP_HOME
+
+# Give permissions
+RUN chmod 755 image-entrypoint.sh
+
+ENTRYPOINT ["/image-entrypoint.sh"]
