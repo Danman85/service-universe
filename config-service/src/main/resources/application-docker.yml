@@ -1,0 +1,3 @@
+logging:
+  file:
+    name: /service-universe/log/${spring.application.name}.log

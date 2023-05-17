@@ -4,6 +4,7 @@ MAINTAINER Danman85
 
 ENV APP_HOME="/opt/app"
 ENV ARTIFACT_NAME="config-service-0.0.1-SNAPSHOT.jar"
+ENV SPRING_PROFILES_ACTIVE="management,docker"
 # HTTP server port
 ENV SERVER_PORT=8900
 # Java debug port

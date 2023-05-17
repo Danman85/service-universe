@@ -3,5 +3,44 @@ server:
 spring:
   application:
     name: "config-service"
-  profiles:
-    active: "native,management,logging"
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///D:/Dev/Personal/service-universe-config,file:///D:/Dev/Personal/service-universe-config/{application}
+        git:
+          #       This is the file location on the docker container
+          uri: file:/service-universe/service-universe-config
+          search-paths:
+            - '{application}'
+
+---
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      group:
+        custom:
+          include:
+            - diskSpace
+            - ping
+          show-components: always
+          show-details: always
+    env:
+      enabled: true
+      show-values: always
+
+---
+
+logging:
+  level:
+    org.springframework: INFO
+    nl.danman: INFO
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 3
