@@ -4,7 +4,7 @@ ECHO "Starting config-service
 start ..\config-service\scripts\startConfigService.bat
 
 ECHO "Waiting for config-service to start, before continuing."
-TIMEOUT /T 15
+TIMEOUT /T 30
 
 ECHO "Starting discovery-service"
 start ..\discovery-service\scripts\startDiscoveryService.bat

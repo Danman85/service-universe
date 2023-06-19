@@ -4,6 +4,7 @@
 SET JDK=%JAVA_HOME%
 FOR %%a in ("%~dp0\..\..") do SET PROJECT_DIR=%%~fa
 SET PROP_FILE=%PROJECT_DIR%/project.properties
+SET ACTIVE_PROFILES_PROPERTY="-Dspring.profiles.active=local"
 
 IF EXIST %PROP_FILE% (
     ECHO "Property file found, using custom properties"
@@ -20,9 +21,16 @@ ECHO "- Jdk: %JDK%"
 SET SERVICE_NAME=discovery-service
 SET BUILD_DIR=%PROJECT_DIR%\%SERVICE_NAME%\target
 
+ECHO %BUILD_DIR%
+
 FOR %%F in (%BUILD_DIR%\*.jar) DO (
     SET JAR_FILE=%%F
 )
+
+SET JVM_ARGS=-Xmx128m -Dvisualvm.id=%SERVICE_NAME% %ACTIVE_PROFILES_PROPERTY%
+
+@ECHO ON
+%JDK%\bin\java %JVM_ARGS% -jar "%JAR_FILE%"
 
 SET JVM_ARGS=-Xmx128m -Dvisualvm.id=%SERVICE_NAME%
 

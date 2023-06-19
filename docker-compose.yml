@@ -1,0 +1,41 @@
+services:
+  config-service:
+    container_name: su-config-service
+    image: su-config-service:latest
+    healthcheck:
+
+      test: [ "CMD", "curl", "-f", "http://localhost:8900" ]
+    ports:
+      - 8900:8900
+      - 8901:8901
+    volumes:
+      - service-universe-volume:/service-universe
+    working_dir: /config-service
+    environment:
+      DEBUG: "true"
+    networks:
+        - service-universe-network
+
+  discovery-service:
+    container_name: su-discovery-service
+    image: su-discovery-service:latest
+    depends_on:
+      config-service:
+        condition: service_healthy
+    ports:
+      - 8910:8910
+      - 8911:8911
+    volumes:
+      - service-universe-volume:/service-universe
+    working_dir: /discovery-service
+    environment:
+      DEBUG: "true"
+    networks:
+      - service-universe-network
+
+volumes:
+  service-universe-volume:
+
+networks:
+  service-universe-network:
+    driver: bridge
