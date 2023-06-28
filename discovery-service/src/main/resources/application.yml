@@ -3,7 +3,6 @@
 spring:
   application:
     name: "discovery-service"
-  profiles:
-    active: management,logging
   config:
-    import: optional:configserver:http://localhost:8900
+#    https://docs.spring.io/spring-cloud-config/docs/current/reference/html/#_quick_start
+    import: optional:configserver:http://su-config-service:8900,optional:configserver:http://localhost:8900

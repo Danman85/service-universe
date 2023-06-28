@@ -1,0 +1,38 @@
+services:
+  config-service:
+    container_name: su-config-service
+    image: su-config-service:latest
+    ports:
+      - 8900:8900
+      - 8901:8901
+    volumes:
+      - service-universe:/service-universe
+    working_dir: /config-service
+    environment:
+      DEBUG: "true"
+    networks:
+        - service-universe-network
+
+  discovery-service:
+    container_name: su-discovery-service
+    image: su-discovery-service:latest
+    depends_on:
+      config-service:
+        condition: service_started
+    ports:
+      - 8910:8910
+      - 8911:8911
+    volumes:
+      - service-universe:/service-universe
+    working_dir: /discovery-service
+    environment:
+      DEBUG: "true"
+    networks:
+      - service-universe-network
+
+volumes:
+  service-universe:
+
+networks:
+  service-universe-network:
+    driver: bridge
