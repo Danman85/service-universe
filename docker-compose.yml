@@ -5,6 +5,12 @@ services:
     ports:
       - 8900:8900
       - 8901:8901
+    healthcheck:
+      test: curl --fail http://localhost:8900/actuator/health || exit 1
+      interval: 10s
+      retries: 2
+      start_period: 20s
+      timeout: 3s
     volumes:
       - service-universe:/service-universe
     working_dir: /config-service
@@ -18,15 +24,45 @@ services:
     image: su-discovery-service:latest
     depends_on:
       config-service:
-        condition: service_started
+        condition: service_healthy
     ports:
       - 8910:8910
       - 8911:8911
+    healthcheck:
+      test: curl --fail http://localhost:8900/actuator/health || exit 1
+      interval: 10s
+      retries: 2
+      start_period: 20s
+      timeout: 3s
     volumes:
       - service-universe:/service-universe
     working_dir: /discovery-service
     environment:
       DEBUG: "true"
+    networks:
+      - service-universe-network
+
+  admin-service:
+    container_name: su-admin-service
+    image: su-admin-service:latest
+    depends_on:
+      config-service:
+        condition: service_healthy
+    ports:
+      - 8920:8920
+      - 8921:8921
+    healthcheck:
+      test: curl --fail http://localhost:8900/actuator/health || exit 1
+      interval: 10s
+      retries: 2
+      start_period: 20s
+      timeout: 3s
+    volumes:
+      - service-universe:/service-universe
+    working_dir: /admin-service
+    environment:
+      DEBUG: "true"
+      eureka.client.service-url.efaultZone: http://discovery-service:8910/eureka
     networks:
       - service-universe-network
 
