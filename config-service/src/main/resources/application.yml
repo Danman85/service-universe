@@ -10,7 +10,8 @@ spring:
           search-locations: file:///D:/Dev/Personal/service-universe-config,file:///D:/Dev/Personal/service-universe-config/{application}
         git:
           #       This is the file location on the docker container
-          uri: file:/service-universe/service-universe-config
+#          uri: file:/service-universe/service-universe-config
+          uri: https://github.com/Danman85/service-universe-config
           search-paths:
             - '{application}'
 
@@ -32,6 +33,8 @@ management:
           show-details: always
     env:
       enabled: true
+      show-values: always
+    configprops:
       show-values: always
 
 ---
