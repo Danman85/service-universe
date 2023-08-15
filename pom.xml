@@ -13,6 +13,7 @@
   <description>Spring cloud based microservice landscape</description>
   <inceptionYear>2023</inceptionYear>
   <modules>
+    <module>su-spring-boot-starter</module>
     <module>config-service</module>
     <module>admin-service</module>
     <module>discovery-service</module>
