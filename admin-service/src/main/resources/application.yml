@@ -1,7 +1,7 @@
 spring:
   application:
     name: "admin-service"
-  profiles:
-    active:
+  banner:
+    location: classpath:/service-universe-banner.txt
   config:
     import: optional:configserver:http://su-config-service:8900,optional:configserver:http://localhost:8900

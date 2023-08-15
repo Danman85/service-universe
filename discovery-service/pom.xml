@@ -48,6 +48,11 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>nl.danman</groupId>
+            <artifactId>su-spring-boot-starter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- ============================================= -->
         <!-- * Test dependencies       -->
         <!-- ============================================= -->
