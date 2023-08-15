@@ -1,6 +1,9 @@
 spring:
   application:
     name: demo-service
+  banner:
+    location: classpath:/service-universe-banner.txt
+
   profiles:
     active: management,logging
   config:

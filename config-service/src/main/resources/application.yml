@@ -14,6 +14,8 @@ spring:
           uri: https://github.com/Danman85/service-universe-config
           search-paths:
             - '{application}'
+  banner:
+    location: classpath:/service-universe-banner.txt
 
 ---
 
