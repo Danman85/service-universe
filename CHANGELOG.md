@@ -10,8 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - UNRELEASED
 
 ### Added
+* Incorporated the io.fabric8 maven plugin to create docker images during build.
 * Disabled integration-test phase from being run automatically and moved it to a profile.
-* Added a service universe starter. 
+* Added a service universe Spring starter. 
 * Three 'core' services: config-, discovery- and admin-service.
 * Implemented a demo service, in which to play around.
 * Start-up scripting for Windows, see the various '/scripts' folders both in the Parent project and the child modules.

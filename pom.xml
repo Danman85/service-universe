@@ -27,6 +27,7 @@
     <!-- Dependency versions -->
     <version.spring.boot>3.0.4</version.spring.boot>
     <spring-cloud.version>2022.0.1</spring-cloud.version>
+    <version.fabric8>0.37.0</version.fabric8>
     <eureka.client.version>4.0.0</eureka.client.version>
     <maven.failsafe.version>3.1.2</maven.failsafe.version>
     <maven.surefire.version>3.1.2</maven.surefire.version>
@@ -148,6 +149,35 @@
   </build>
 
   <profiles>
+    <profile>
+      <id>containerize</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>${version.fabric8}</version>
+            <configuration>
+              <verbose>true</verbose>
+              <!-- We don't want this to run for every module or the parent -->
+              <skip>true</skip>
+              <images>
+                <image>
+                  <name>su-${project.artifactId}</name>
+                  <build>
+                    <dockerFileDir>${project.basedir}</dockerFileDir>
+                    <tags>
+                      <tag>latest</tag>
+                    </tags>
+                  </build>
+                </image>
+              </images>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
     <profile>
       <id>runit</id>
       <build>
