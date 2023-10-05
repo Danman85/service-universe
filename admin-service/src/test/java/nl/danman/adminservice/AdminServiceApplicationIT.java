@@ -1,4 +1,4 @@
-package nl.danman.demoservice;
+package nl.danman.adminservice;
 
 import nl.danman.su.spring.boot.starter.service.StartupService;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
-class DemoServiceApplicationTests {
+class AdminServiceApplicationIT {
 
     @SpyBean
     private StartupService startupServiceSpy;
