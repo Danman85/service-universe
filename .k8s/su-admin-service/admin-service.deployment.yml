@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: su-admin-service
+  name: su-admin-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: su-admin-service
+  template:
+    metadata:
+      labels:
+        app: su-admin-service
+    spec:
+      initContainers:
+        - name: init-su-admin-service
+          image: danman/alpine-curl-jq:latest
+          imagePullPolicy: Never
+          command: [ 'sh' ]
+          args:
+            - '-c'
+            - >
+              set -x;
+              counter=0;
+              while [ "x$(curl 'su-config-service:8900/actuator/health' | jq -r '.status')" == "x" ]; do
+                if [ $counter -eq 1 ]; then
+                  exit 1;
+                fi;
+                let "counter+=1";
+                sleep 15;
+              done;
+      containers:
+        - image: su-admin-service
+          name: su-admin-service
+          # Images are only built locally for now and not available at a remote repo
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8920
+            - containerPort: 8921
+          env:
+            - name: DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: admin-service-settings
+                  key: debug
+          resources:
+            limits:
+              memory: "256Mi"

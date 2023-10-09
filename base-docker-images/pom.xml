@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>service-universe-parent</artifactId>
+        <groupId>nl.danman</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>nl.danman</groupId>
+    <artifactId>base-docker-images</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>danman/alpine-curl-jq</name>
+    <description>image which provides curl and jq</description>
+    <packaging>pom</packaging>
+
+    <profiles>
+        <profile>
+            <id>containerize</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <!-- We don't want this to run for every module or the parent -->
+                            <skip>false</skip>
+                            <images>
+                                <image>
+                                    <name>danman/alpine-curl-jq</name>
+                                    <build>
+                                        <dockerFileDir>${project.basedir}</dockerFileDir>
+                                        <tags>
+                                            <tag>latest</tag>
+                                        </tags>
+                                    </build>
+                                </image>
+                            </images>
+                        </configuration>
+                        <!-- Hooking into the lifecycle -->
+                        <executions>
+                            <execution>
+                                <id>build</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>deploy</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>push</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

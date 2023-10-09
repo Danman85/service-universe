@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: su-config-service
+  name: su-config-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: su-config-service
+  template:
+    metadata:
+      labels:
+        app: su-config-service
+    spec:
+      containers:
+        - image: su-config-service
+          name: su-config-service
+          # Images are only built locally for now and not available at a remote repo
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8900
+            - containerPort: 8901
+          env:
+            - name: DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: config-service-settings
+                  key: debug
+          resources:
+            limits:
+              memory: "256Mi"

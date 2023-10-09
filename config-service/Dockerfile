@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk
+FROM openjdk:17-jdk-alpine
 
 MAINTAINER Danman85
 
@@ -22,10 +22,3 @@ COPY /target/*.jar $APP_HOME
 RUN chmod 755 image-entrypoint.sh
 
 ENTRYPOINT ["/image-entrypoint.sh"]
-
-# WHERE DID I LEAVE OFF?
-# In orde tostart discovery service, we need to start config service first.
-# therefore a health check needs to be added.
-# Since the openJDK image does not have curl or anything similar, I am testing with a new base image.
-# Currently using alpine and see if that works.
-# See OBST for examples

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: su-config-service
+  labels:
+    app: su-config-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: su-config-service
+  ports:
+    - name: "8900"
+      port: 8900
+      targetPort: 8900
+    - name: "8901"
+      port: 8901
+      targetPort: 8901

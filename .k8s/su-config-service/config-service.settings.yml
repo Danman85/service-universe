@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-service-settings
+  labels:
+    app: config-service-settings
+data:
+  debug: "true"
