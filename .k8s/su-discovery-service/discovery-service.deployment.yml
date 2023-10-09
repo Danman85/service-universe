@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: su-discovery-service
+  name: su-discovery-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: su-discovery-service
+  template:
+    metadata:
+      labels:
+        app: su-discovery-service
+    spec:
+      initContainers:
+        - name: init-su-discovery-service
+          image: danman/alpine-curl-jq:latest
+          imagePullPolicy: Never
+          command: [ 'sh' ]
+          args:
+            - '-c'
+            - >
+              set -x;
+              counter=0;
+              while [ "x$(curl 'su-config-service:8900/actuator/health' | jq -r '.status')" == "x" ]; do
+                if [ $counter -eq 1 ]; then
+                  exit 1;
+                fi;
+                let "counter+=1";
+                sleep 15;
+              done;
+      containers:
+        - image: su-discovery-service
+          name: su-discovery-service
+          # Images are only built locally for now and not available at a remote repo
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8910
+            - containerPort: 8911
+          env:
+            - name: DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: discovery-service-settings
+                  key: debug
+          resources:
+            limits:
+              memory: "256Mi"
